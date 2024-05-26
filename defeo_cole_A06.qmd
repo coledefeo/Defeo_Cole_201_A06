@@ -238,6 +238,7 @@ temps_co <- subset(x = max_temps, subset = state == "CO", select = c(names(max_t
 temps_oh <- subset(x = max_temps, subset = state == "OH", select = c(names(max_temps)))
 temps_va <- subset(x = max_temps, subset = state == "VA", select = c(names(max_temps)))
 
+
 ```
 
 ### Part c (5 points)
