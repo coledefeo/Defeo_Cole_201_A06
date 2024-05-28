@@ -266,7 +266,7 @@ Note: This code should still run successfully even if the numbers were to change
 temps_co_num <- lapply(temps_co, as.numeric)
 temps_co_num <- as.data.frame(temps_co_num) # converting temps_co to numeric and back to data frame
 
-all_median_temps <- apply(temps_co_num, MARGIN = 1, FUN = median, na.rm = TRUE)
+all_median_temps <- apply(temps_co_num, MARGIN = 1, FUN = median, na.rm = TRUE) # just median temps
 
 
 years <- 1895:2020  # sequence to correspond years with median temps
@@ -299,8 +299,8 @@ digit_sum <- function(x) {
   if(x < 10){ # base case
     return(x)
   } else { # recursive case
-    last_digit <-x %% 10
-    trunc_num <- x %/% 10
+    last_digit <-x %% 10 # last digit of number to add to function
+    trunc_num <- x %/% 10 # the remaining number once the last digit is removed
     return(last_digit + digit_sum(trunc_num))
   }
 }

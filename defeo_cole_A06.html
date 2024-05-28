@@ -3417,12 +3417,12 @@ $SO
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>df_round</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4] [,5]
-[1,] 2000  800  500  800  100
-[2,] 1000  300 1000  700  600
-[3,] 1000   60  300   10   80
-[4,] 2000  900  200   60   20
-[5,]  200 2000 2000  100   10
-[6,]   20 2000 2000 1000   10</code></pre>
+[1,]  300 1000  800 1000   60
+[2,]  200  900   50  600  700
+[3,]   20 2000  400 1000 1000
+[4,]   60   90   40  900  700
+[5,] 1000 1000 2000 2000 2000
+[6,]   40   50   80  300   40</code></pre>
 </div>
 </div>
 </section>
@@ -3485,7 +3485,7 @@ $SO
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>temps_co_num <span class="ot">&lt;-</span> <span class="fu">lapply</span>(temps_co, as.numeric)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>temps_co_num <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(temps_co_num) <span class="co"># converting temps_co to numeric and back to data frame</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>all_median_temps <span class="ot">&lt;-</span> <span class="fu">apply</span>(temps_co_num, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> median, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>all_median_temps <span class="ot">&lt;-</span> <span class="fu">apply</span>(temps_co_num, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> median, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># just median temps</span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">1895</span><span class="sc">:</span><span class="dv">2020</span>  <span class="co"># sequence to correspond years with median temps</span></span>
@@ -3518,8 +3518,8 @@ $SO
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">&lt;</span> <span class="dv">10</span>){ <span class="co"># base case</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> { <span class="co"># recursive case</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    last_digit <span class="ot">&lt;-</span>x <span class="sc">%%</span> <span class="dv">10</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    trunc_num <span class="ot">&lt;-</span> x <span class="sc">%/%</span> <span class="dv">10</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    last_digit <span class="ot">&lt;-</span>x <span class="sc">%%</span> <span class="dv">10</span> <span class="co"># last digit of number to add to function</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    trunc_num <span class="ot">&lt;-</span> x <span class="sc">%/%</span> <span class="dv">10</span> <span class="co"># the remaining number once the last digit is removed</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(last_digit <span class="sc">+</span> <span class="fu">digit_sum</span>(trunc_num))</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>}</span>
