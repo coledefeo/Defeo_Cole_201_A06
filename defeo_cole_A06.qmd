@@ -268,9 +268,19 @@ Write a recursive function that calculates the sum of the digits in a number.
 
 Example: The number 312 would return 6 (3 + 1 + 2)
 
-Run your function with 935068.
+Run your function with 935068
 
 ```{r}
+digit_sum <- function(x) {
+  if(x < 10){ # base case
+    return(x)
+  } else { # recursive case
+    last_digit <-x %% 10
+    trunc_num <- x %/% 10
+    return(last_digit + digit_sum(trunc_num))
+  }
+}
 
+print(digit_sum(935068))
 ```
 
