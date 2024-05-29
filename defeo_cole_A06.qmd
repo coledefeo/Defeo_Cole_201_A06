@@ -220,7 +220,7 @@ Calculate the average temperature for each month across the whole data frame (us
 max_temps_num <- lapply(max_temps, as.numeric) #converting values to numeric
 max_temps_num <- as.data.frame(max_temps_num)
 
-mean_temps <- apply(max_temps_num, MARGIN = 2 ,FUN = mean, na.rm = TRUE) # apply() to find mean temps in each column
+mean_temps <- apply(max_temps_num, 2 , mean, na.rm = TRUE) # apply() to find mean temps in each column
 
 mean_temps
 
@@ -263,10 +263,10 @@ Example (this is NOT the answer just an example of what goes in the {}):
 Note: This code should still run successfully even if the numbers were to change.
 
 ```{r}
-temps_co_num <- lapply(temps_co, as.numeric)
-temps_co_num <- as.data.frame(temps_co_num) # converting temps_co to numeric and back to data frame
+temps_co_num <- as.data.frame(apply(temps_co, 1:2,  as.numeric)) # converting temps_co to numeric and back to data frame
+temps_co_num <- temps_co_num[, -c(1,2)] #removing state and year columns
 
-all_median_temps <- apply(temps_co_num, MARGIN = 1, FUN = median, na.rm = TRUE) # just median temps
+all_median_temps <- apply(temps_co_num,1,  median, na.rm = TRUE) # just median temps
 
 
 years <- 1895:2020  # sequence to correspond years with median temps

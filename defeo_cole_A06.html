@@ -3417,12 +3417,12 @@ $SO
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>df_round</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4] [,5]
-[1,]  300 1000  800 1000   60
-[2,]  200  900   50  600  700
-[3,]   20 2000  400 1000 1000
-[4,]   60   90   40  900  700
-[5,] 1000 1000 2000 2000 2000
-[6,]   40   50   80  300   40</code></pre>
+[1,]   80 2000  300 2000  400
+[2,]  900  600  600   90  600
+[3,] 2000  700  100   60 2000
+[4,] 1000 1000  500  500 1000
+[5,]   20   40   50 2000  900
+[6,]   90 1000   60 2000   70</code></pre>
 </div>
 </div>
 </section>
@@ -3446,7 +3446,7 @@ $SO
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>max_temps_num <span class="ot">&lt;-</span> <span class="fu">lapply</span>(max_temps, as.numeric) <span class="co">#converting values to numeric</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>max_temps_num <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(max_temps_num)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>mean_temps <span class="ot">&lt;-</span> <span class="fu">apply</span>(max_temps_num, <span class="at">MARGIN =</span> <span class="dv">2</span> ,<span class="at">FUN =</span> mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># apply() to find mean temps in each column</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>mean_temps <span class="ot">&lt;-</span> <span class="fu">apply</span>(max_temps_num, <span class="dv">2</span> , mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># apply() to find mean temps in each column</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>mean_temps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3482,10 +3482,10 @@ $SO
 <p>“The maximum median annual temperature of 68.25 occurred in 2017 and the minimum median annual temperature of 57.15 occurred in 1907.”</p>
 <p>Note: This code should still run successfully even if the numbers were to change.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>temps_co_num <span class="ot">&lt;-</span> <span class="fu">lapply</span>(temps_co, as.numeric)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>temps_co_num <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(temps_co_num) <span class="co"># converting temps_co to numeric and back to data frame</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>temps_co_num <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">apply</span>(temps_co, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,  as.numeric)) <span class="co"># converting temps_co to numeric and back to data frame</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>temps_co_num <span class="ot">&lt;-</span> temps_co_num[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)] <span class="co">#removing state and year columns</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>all_median_temps <span class="ot">&lt;-</span> <span class="fu">apply</span>(temps_co_num, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">FUN =</span> median, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># just median temps</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>all_median_temps <span class="ot">&lt;-</span> <span class="fu">apply</span>(temps_co_num,<span class="dv">1</span>,  median, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># just median temps</span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">1895</span><span class="sc">:</span><span class="dv">2020</span>  <span class="co"># sequence to correspond years with median temps</span></span>
@@ -3503,7 +3503,7 @@ $SO
 <span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;The maximum median annual temperature of &quot;</span>, max_med_temp, <span class="st">&quot; occurred in &quot;</span>, max_year, <span class="st">&quot; and the minimum median annual temperature of &quot;</span>, min_med_temp, <span class="st">&quot; occurred in &quot;</span>, min_year, <span class="st">&quot;.&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;The maximum median annual temperature of 67.8 occurred in 1963 and the minimum median annual temperature of 51.7 occurred in 1984.&quot;</code></pre>
+<pre><code>[1] &quot;The maximum median annual temperature of 63.95 occurred in 1934 and the minimum median annual temperature of 50.85 occurred in 1984.&quot;</code></pre>
 </div>
 </div>
 </section>
